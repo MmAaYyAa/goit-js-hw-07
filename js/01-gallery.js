@@ -42,7 +42,25 @@ function onClick(event){
     const largeImg = event.target.dataset.source;
     console.log(largeImg);
    
- 
+ const instance = basicLightbox.create(`
+    <div class="modal">
+        <img src="${largeImg}" width = "500" >
+    </div>
+`);
+
+    instance.show();
+
+    document.addEventListener('keydown', onEscapePress);
+
+function onEscapePress(event) {
+    if (event.code === 'Escape') {
+        instance.close();
+    }
+    document.removeEventListener('keydown', onEscapePress);
+   
+}
+    
+
 }
  
 
