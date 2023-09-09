@@ -5,16 +5,6 @@ const galleryContainer = document.querySelector(".gallery");
 
 //console.log(galleryContainer)
 
-// <li class="gallery__item">
-//   <a class="gallery__link" href="large-image.jpg">
-//     <img
-//       class="gallery__image"
-//       src="small-image.jpg"
-//       data-source="large-image.jpg"
-//       alt="Image description"
-//     />
-//   </a>
-// </li>
 
 const markup = galleryItems.map(({ preview, original, description }) => `<li class="gallery__item" >
 <a class="gallery__link" href="${original}">
@@ -46,20 +36,23 @@ function onClick(event){
     <div class="modal">
         <img src="${largeImg}" width = "500" >
     </div>
-`);
+`,
+     {
+        onShow: (instance) => {
+            document.addEventListener('keydown', onEscapePress);
+        },
+        onClose: (instance) => {
+            document.removeEventListener('keydown', onEscapePress);
+        }
+    });
 
-    instance.show();
+      instance.show();
 
-    document.addEventListener('keydown', onEscapePress);
-
-function onEscapePress(event) {
-    if (event.code === 'Escape') {
-        instance.close();
-    }
-    document.removeEventListener('keydown', onEscapePress);
-   
-}
-    
+    function onEscapePress(event) {
+        if (event.code === 'Escape') {
+            instance.close();
+        }
+    }  
 
 }
  
